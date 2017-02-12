@@ -213,19 +213,29 @@ export function stop(e) {
 	return this;
 }
 
+// Very ugly hack to fix https://github.com/Leaflet/Leaflet/issues/2795
+var _containerScale = 1;
+export function setContainerScale(scale) {
+	_containerScale = scale;
+}
+
 // @function getMousePosition(ev: DOMEvent, container?: HTMLElement): Point
 // Gets normalized mouse position from a DOM event relative to the
 // `container` or to the whole page if not specified.
 export function getMousePosition(e, container) {
-	if (!container) {
-		return new Point(e.clientX, e.clientY);
-	}
+	const clientX = e.clientX / _containerScale;
+  const clientY = e.clientY / _containerScale;
 
-	var rect = container.getBoundingClientRect();
+  if (!container) {
+    return new Point(clientX, clientY);
+  }
 
-	return new Point(
-		e.clientX - rect.left - container.clientLeft,
-		e.clientY - rect.top - container.clientTop);
+  var rect = container.getBoundingClientRect();
+
+  return new Point(
+    clientX - rect.left - container.clientLeft,
+    clientY - rect.top - container.clientTop
+  );
 }
 
 // Chrome on Win scrolls double the pixels as in other platforms (see #4538),

@@ -1,5 +1,5 @@
 /*
- * Leaflet 1.0.3+master.1010451, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.0.3+master.2b5189c, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2016 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 (function (global, factory) {
@@ -8,7 +8,7 @@
 	(factory((global.L = global.L || {})));
 }(this, (function (exports) { 'use strict';
 
-var version = "1.0.3+master.1010451";
+var version = "1.0.3+master.2b5189c";
 
 /*
  * @namespace Util
@@ -2338,8 +2338,8 @@ function setContainerScale(scale) {
 // Gets normalized mouse position from a DOM event relative to the
 // `container` or to the whole page if not specified.
 function getMousePosition(e, container) {
-	const clientX = e.clientX / _containerScale;
-  const clientY = e.clientY / _containerScale;
+	var clientX = e.clientX / _containerScale;
+  var clientY = e.clientY / _containerScale;
 
   if (!container) {
     return new Point(clientX, clientY);

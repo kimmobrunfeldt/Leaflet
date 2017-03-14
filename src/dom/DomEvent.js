@@ -223,8 +223,8 @@ export function setContainerScale(scale) {
 // Gets normalized mouse position from a DOM event relative to the
 // `container` or to the whole page if not specified.
 export function getMousePosition(e, container) {
-	const clientX = e.clientX / _containerScale;
-  const clientY = e.clientY / _containerScale;
+	var clientX = e.clientX / _containerScale;
+  var clientY = e.clientY / _containerScale;
 
   if (!container) {
     return new Point(clientX, clientY);
